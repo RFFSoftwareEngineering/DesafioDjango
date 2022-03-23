@@ -15,7 +15,7 @@ def home(request):
          }
         return render(request, 'app/index.html', context)
     else:
-        return redirect("CreateUser")
+        return redirect("UserProfile")
 
 
 def cadastro(request):
