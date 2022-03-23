@@ -28,3 +28,10 @@ class Usuario(Base):
     email = models.EmailField("email")  
     password1 = models.CharField("password", max_length=120)  
     password2 = models.CharField("Confirm password", max_length=120) 
+
+
+class MegaProfile(Usuario):
+    UserImg = StdImageField("Imagem", upload_to="Profile", variations={"thumb" : (124, 124)})
+    UserFrom = models.CharField('From Where', max_length=120)
+    UserPlayerName = models.CharField('Player Name', max_length=120)
+    UserMsgBody = models.TextField('Mensagem', max_length=550)

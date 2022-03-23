@@ -2,7 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from .models import Profile
-from .forms import ProfileModelForm, CustomUserCreationForm
+from .forms import ProfileModelForm, CustomUserCreationForm, MegaProfileModelForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  
@@ -49,3 +49,19 @@ def User_view(request):
         "form2": form2
     }
     return render(request, 'app/CriaUser.html', context)
+
+def UserProfile(request):
+    form3 = MegaProfileModelForm(request.POST, request.FILES)
+    if str(request.method) == "POST":
+        if form3.is_valid():
+            form3.save()
+            messages.success(request, "Usuário e Perfil Criado com Sucesso!")
+            form3 = MegaProfileModelForm()
+        else:
+            messages.error(request, "Erro ao criar usuário e perfil")
+    else:
+        form3 = MegaProfileModelForm()
+    context = {
+        "form3": form3
+    }
+    return render(request, 'app/UserProfile.html', context)

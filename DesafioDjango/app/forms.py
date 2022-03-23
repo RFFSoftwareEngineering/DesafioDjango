@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import Profile, Usuario
+from .models import Profile, Usuario, MegaProfile
 from django.contrib.auth.models import User  
 from django.core.exceptions import ValidationError  
 from django.forms.fields import EmailField  
@@ -60,3 +60,9 @@ class CustomUserCreationForm(UserCreationForm):
             self.cleaned_data['password1']  
         )  
         return user
+
+
+class MegaProfileModelForm(forms.ModelForm):
+    class Meta:
+        model = MegaProfile
+        fields = ['username', 'email', 'password1', 'password2', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
