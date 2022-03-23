@@ -16,7 +16,7 @@ def home(request):
          }
         return render(request, 'app/index.html', context)
     else:
-        return redirect("UserProfile")
+        return redirect("CreateUser")
 
 
 def cadastro(request):
@@ -74,7 +74,7 @@ def UserView(request):
          }
         return render(request, 'app/UserView.html', context)
     else:
-        return redirect("UserProfile")
+        return redirect("CreateUser")
 
 def post_on_feed(request):
     form4 = FeedPostModelForm(request.POST or None)

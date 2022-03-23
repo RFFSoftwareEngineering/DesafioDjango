@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Base, User, Profile, MegaProfile, FeedPost, Comments
+from .models import Base, User, Usuario, Profile, MegaProfile, FeedPost, Comments, Like, Comments
 
 @admin.register(Base)
 class BaseAdmin(admin.ModelAdmin):
@@ -13,6 +13,10 @@ class UserAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['PlayerName', 'From']
 
+@admin.register(Usuario)
+class UsuaroAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email', 'password1', 'password2']
+
 @admin.register(MegaProfile)
 class MegaProfileAdmin(admin.ModelAdmin):
     list_display = ['username', 'email', 'password1', 'password2', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
@@ -24,3 +28,7 @@ class FeedPostAdmin(admin.ModelAdmin):
 @admin.register(Comments)
 class CommentsAdmin(admin.ModelAdmin):
     list_display = ['autor', 'num_likes_comm', 'criado', 'Msg']
+
+@admin.register(Like)
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ['user', 'post', 'value']
