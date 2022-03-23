@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\templates\app\CriaUser.html" />
+    <Content Include="app\templates\app\login.html" />
     <Content Include="media\media\medieval-knight-dark.jpg" />
     <Content Include="requirements.txt" />
     <Content Include="app\static\app\content\bootstrap.css" />
@@ -91,7 +92,6 @@
     <Content Include="app\static\app\scripts\_references.js" />
     <Content Include="app\templates\app\cadastro.html" />
     <Content Include="app\templates\app\index.html" />
-    <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
   </ItemGroup>
   <ItemGroup>
