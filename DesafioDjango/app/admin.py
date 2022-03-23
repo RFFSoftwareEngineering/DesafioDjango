@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Base, User, Profile
+from .models import Base, User, Profile, MegaProfile
 
 @admin.register(Base)
 class BaseAdmin(admin.ModelAdmin):
@@ -13,3 +13,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['PlayerName', 'From']
+
+@admin.register(MegaProfile)
+class MegaProfileAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email', 'password1', 'password2', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']

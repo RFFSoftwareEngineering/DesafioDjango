@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
-from .models import Profile
+from .models import Profile, MegaProfile
 from .forms import ProfileModelForm, CustomUserCreationForm, MegaProfileModelForm
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -65,3 +65,12 @@ def UserProfile(request):
         "form3": form3
     }
     return render(request, 'app/UserProfile.html', context)
+
+def UserView(request):
+    if str(request.user) != "AnonymousUser":
+        context = {
+            "User": MegaProfile.objects.all()
+         }
+        return render(request, 'app/UserView.html', context)
+    else:
+        return redirect("UserProfile")
