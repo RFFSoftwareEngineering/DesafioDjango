@@ -1,25 +1,17 @@
-"""
-Definition of views.
-"""
-
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
+from .models import Profile
+
 
 def home(request):
-    """Renders the home page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/index.html',
-        {
-            'title':'Home Page',
-            'year':datetime.now().year,
-        }
-    )
+    context = {
+        "Perfil": Profile.objects.all()
+    }
+    return render(request, 'app/index.html', context)
+
 
 def contact(request):
-    """Renders the contact page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -32,7 +24,6 @@ def contact(request):
     )
 
 def about(request):
-    """Renders the about page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,

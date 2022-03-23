@@ -1,4 +1,3 @@
-
 import os
 import posixpath
 import pymysql
@@ -17,6 +16,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'app',
     'bootstrap5',
+    'stdimage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
