@@ -27,5 +27,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('UserProfile/', views.UserProfile, name='UserProfile'),
     path('UserView/', views.UserView, name='UserView'),
+    path('FeedPost/', views.post_on_feed, name='FeedPost'),
     path('admin/', admin.site.urls),
 ]

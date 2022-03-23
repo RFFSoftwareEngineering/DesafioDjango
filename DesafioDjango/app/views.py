@@ -1,11 +1,12 @@
 from datetime import datetime
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import Profile, MegaProfile
-from .forms import ProfileModelForm, CustomUserCreationForm, MegaProfileModelForm
+from .models import Profile, MegaProfile, FeedPost
+from .forms import ProfileModelForm, CustomUserCreationForm, MegaProfileModelForm, FeedPostModelForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  
+from django.urls import reverse_lazy
 
 
 def home(request):
@@ -74,3 +75,20 @@ def UserView(request):
         return render(request, 'app/UserView.html', context)
     else:
         return redirect("UserProfile")
+
+def post_on_feed(request):
+    form4 = FeedPostModelForm(request.POST or None)
+    if str(request.method) == "POST":
+        if form4.is_valid():
+            form4.save()
+            messages.success(request, "Post feito com Sucesso!")
+            form4 = FeedPostModelForm()
+        else:
+            messages.error(request, "Erro ao postar")
+    else:
+        form4 = FeedPostModelForm()
+    context = {
+        "form4": form4,
+        "Posts": FeedPost.objects.all()
+    }
+    return render(request, 'app/FeedPost.html', context)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load bootstrap5 %}
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Postar no Feed</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Postar:</h1>
+        {% bootstrap_messages %}
+        <form class="form" action="{% url 'FeedPost' %}" method="post" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form4 %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary" name="submitbutton">Share</button>
+            {% endbuttons %}
+        </form>
+    </div>
+    <br /><br />
+    <hr />
+    <div class="container">
+        <h2>Posts</h2>
+        {% for item in Posts %}
+            <hr />
+            <p>autor:{{ item.author }}</p>
+            <p>{{ item.created }}</p>
+            <p>{{ item.MsgBody }}</p>
+            <p>{{ item.Likes }}</p>
+            <p>likes : {{ item.num_likes }}</p>
+            <hr />
+        {% endfor %}
+    </div>
+{% bootstrap_javascript %}
+</body>
+</html>
