@@ -2,8 +2,10 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from .models import Profile
-from .forms import ProfileModelForm
+from .forms import ProfileModelForm, CustomUserCreationForm
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm  
 
 
 def home(request):
@@ -29,14 +31,18 @@ def cadastro(request):
     }
     return render(request, 'app/cadastro.html', context)
 
-def about(request):
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/about.html',
-        {
-            'title':'About',
-            'message':'Your application description page.',
-            'year':datetime.now().year,
-        }
-    )
+def User_view(request):
+    form2 = CustomUserCreationForm(request.POST or None)
+    if str(request.method) == "POST":
+        if form2.is_valid():
+            form2.save()
+            messages.success(request, "Usuário Criado Com Sucesso!")
+            form2 = CustomUserCreationForm()
+        else:
+            messages.error(request, "Erro ao Criar Usuário")
+    else:
+        form2 = CustomUserCreationForm()
+    context = {
+        "form2": form2
+    }
+    return render(request, 'app/CriaUser.html', context)
