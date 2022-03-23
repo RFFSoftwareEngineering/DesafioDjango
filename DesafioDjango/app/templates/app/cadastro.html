@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load bootstrap5 %}
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Perfil</h1>
+        {% bootstrap_messages %}
+        <form class="form" action="{% url 'cadastro' %}" method="post" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form1 %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary" name="submitbutton">Cadastrar</button>
+            {% endbuttons %}
+        </form>
+    </div>
+</body>
+</html>
