@@ -9,10 +9,13 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 def home(request):
-    context = {
-        "Perfil": Profile.objects.all()
-    }
-    return render(request, 'app/index.html', context)
+    if str(request.user) != "AnonymousUser":
+        context = {
+            "Perfil": Profile.objects.all()
+         }
+        return render(request, 'app/index.html', context)
+    else:
+        return redirect("CreateUser")
 
 
 def cadastro(request):
