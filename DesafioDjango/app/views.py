@@ -7,11 +7,17 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 
 def home(request):
     if str(request.user) != "AnonymousUser":
+        data = MegaProfile.objects.all()
+        paginator = Paginator(data, 1)
+        page_number = request.GET.get('home')
+        page_obj = paginator.get_page(page_number)
         context = {
+            'page_obj': page_obj
          }
         return render(request, 'app/index.html', context)
     else:
@@ -44,6 +50,7 @@ def UserProfile(request):
             form3 = MegaProfileModelForm()
         else:
             messages.error(request, "Erro ao criar usuário e perfil")
+        return redirect('home')
     else:
         form3 = MegaProfileModelForm()
     context = {
@@ -81,7 +88,7 @@ def post_on_feed(request):
     return render(request, 'app/FeedPost.html', context)
 
 def like_post(request):
-    user = request.user
+    user = request.user    
     if str(request.method) == "POST":
         post_id = request.POST.get('post_id')
         post_obj = FeedPost.objects.get(id=post_id)

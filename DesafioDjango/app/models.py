@@ -9,6 +9,7 @@ class MegaProfile(models.Model):
     UserFrom = models.CharField('From Where', max_length=120)
     UserPlayerName = models.CharField('Player Name', max_length=120)
     UserMsgBody = models.TextField('Mensagem', max_length=550)
+    UserProfessionAt = models.CharField("Profession at", max_length=120, blank=True)
 
     def __str__(self):
         return str(self.UserPlayerName)

@@ -16,13 +16,11 @@
             <div class="modal-body" id="dynamic-content">
                 <img src="{{ item.UserImg.url }}" class="img-fluid" alt="img 404"/>
             </div>
+            <p>{{ item.usuario }}</p>
             <p>{{ item.UserFrom }}</p>
             <p>{{ item.UserPlayerName }}</p>
             <p>{{ item.UserMsgBody }}</p>
-            <p>{{ item.username }}</p>
-            <p>{{ item.email }}</p>
-            <p>{{ item.password1 }}</p>
-            <p>{{ item.password2 }}</p>
+            <p>{{ item.UserProfessionAt }}</p>
         {% endfor %}
     </div>
 {% bootstrap_javascript %}

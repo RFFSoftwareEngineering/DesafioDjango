@@ -56,6 +56,7 @@
     <Folder Include="app\static\app\" />
     <Folder Include="app\static\app\content\" />
     <Folder Include="app\static\app\fonts\" />
+    <Folder Include="app\static\app\css\" />
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
@@ -64,6 +65,7 @@
     <Folder Include="media\media\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\css\HomePage.css" />
     <Content Include="app\templates\app\CriaUser.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\UserProfile.html" />

@@ -58,7 +58,7 @@ class CustomUserCreationForm(UserCreationForm):
 class MegaProfileModelForm(forms.ModelForm):
     class Meta:
         model = MegaProfile
-        fields = ['usuario', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
+        fields = ['usuario', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserProfessionAt', 'UserMsgBody']
 
 
 class FeedPostModelForm(forms.ModelForm):
