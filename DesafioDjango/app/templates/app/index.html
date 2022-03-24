@@ -12,6 +12,7 @@
 <body>
     <div>
         <h2>Coisas no DB:</h2>
+        <h2>Olá {{ request.user }}</h2>
         {% for item in Perfil %}
             <div class="modal-body" id="dynamic-content">
                 <img src="{{ item.PlayerImg.url }}" class="img-fluid" alt="img 404"/>

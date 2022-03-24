@@ -44,6 +44,7 @@ def User_view(request):
             form2 = CustomUserCreationForm()
         else:
             messages.error(request, "Erro ao Criar Usuário")
+        return redirect('login')
     else:
         form2 = CustomUserCreationForm()
     context = {

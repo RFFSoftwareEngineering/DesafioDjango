@@ -70,7 +70,7 @@ class Like(models.Model):
 
 
 class Comments(models.Model):
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     criado = models.DateTimeField("Date", auto_now_add=True)
     Msg = models.CharField("comment", max_length=120)
     LikesComm = models.ManyToManyField(User, related_name='Comments', default=None, blank=True)
