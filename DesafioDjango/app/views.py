@@ -1,8 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import MegaProfile, FeedPost, Like
-from .forms import CustomUserCreationForm, MegaProfileModelForm, FeedPostModelForm
+from .models import MegaProfile, FeedPost, Like, Comments
+from .forms import CustomUserCreationForm, MegaProfileModelForm, FeedPostModelForm, CommentsModelForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  
@@ -75,6 +75,7 @@ def post_on_feed(request):
     context = {
         "form4": form4,
         "Posts": FeedPost.objects.all(),
+        "Comms": Comments.objects.all(),
         "user": user
     }
     return render(request, 'app/FeedPost.html', context)
@@ -99,4 +100,40 @@ def like_post(request):
                 like.value = 'Like'
 
         like.save()
+        post_id2 = request.POST.get('post_id')
+        post_obj2 = Comments.objects.get(id=post_id)
+
+        if user in post_obj2.LikesComm.all():
+            post_obj2.LikesComm.remove(user)
+        else:
+            post_obj2.LikesComm.add(user)
+
+        like, created = Like.objects.get_or_create(user=user, post_id=post_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'UnLike'
+            else:
+                like.value = 'Like'
+
+        like.save()
     return redirect('FeedPost')
+
+def comm_post(request):
+    form5 = CommentsModelForm(request.POST or None)
+    user = request.user
+    if str(request.method) == "POST":
+        if form5.is_valid():
+            form5.save()
+            messages.success(request, "Comentário feito com Sucesso!")
+            form5 = CommentsModelForm()
+        else:
+            messages.error(request, "Erro ao postar comment")
+        return redirect('FeedPost')
+    else:
+        form4 = CommentsModelForm()
+    context = {
+        "form5": form5,
+        "user": user
+    }
+    return render(request, 'app/CommPost.html', context)

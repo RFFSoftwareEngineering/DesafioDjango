@@ -27,6 +27,7 @@
         <h2>Posts</h2>
         {% for item in Posts %}
             <hr />
+            <hr />
             <p>autor:{{ item.author }} posted Msg:</p>
             <p>{{ item.created }}</p>
             <p>{{ item.MsgBody }}</p>
@@ -39,7 +40,30 @@
                     <button class="btn btn-primary" type="submit">UnLike</button>
                 {% endif %}
             </form>
-            <strong>{{ item.Likes.all.count }} likes</strong>
+            <strong>{{ item.Likes.all.count }} likes</strong><a id="comm_id" class="btn btn-primary btn-sm" href="{% url 'Comentario' %}">Comment</a> 
+            <hr />
+            <hr />
+        {% endfor %}
+    </div>
+    <div class="container">
+        <h4>Comentários</h4>
+        {% for item in Comms %}
+            <hr />
+            <hr />
+            <p>autor:{{ item.autor }} posted Comment:</p>
+            <p>{{ item.criado }}</p>
+            <p>{{ item.Msg }}</p>
+            <form action="{% url 'like-post' %}" method="post" class="form">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ item.id }}"/>
+                {% if user not in item.LikesComm.all %}
+                    <button class="btn btn-primary" type="submit">Like</button>
+                {% else %}
+                    <button class="btn btn-primary" type="submit">UnLike</button>
+                {% endif %}
+            </form>
+            <strong>{{ item.LikesComm.all.count }} likes</strong><a id="comm_id" class="btn btn-primary btn-sm" href="{% url 'Comentario' %}">Comment</a> 
+            <hr />
             <hr />
         {% endfor %}
     </div>

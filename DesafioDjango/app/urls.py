@@ -28,5 +28,6 @@ urlpatterns = [
     path('UserView/', views.UserView, name='UserView'),
     path('FeedPost/', views.post_on_feed, name='FeedPost'),
     path('like/', views.like_post, name='like-post'),
+    path('comment/', views.comm_post, name='Comentario'),
     path('admin/', admin.site.urls),
 ]

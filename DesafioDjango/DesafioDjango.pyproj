@@ -69,6 +69,7 @@
     <Content Include="app\templates\app\UserProfile.html" />
     <Content Include="app\templates\app\UserView.html" />
     <Content Include="app\templates\app\FeedPost.html" />
+    <Content Include="app\templates\app\CommPost.html" />
     <Content Include="media\media\medieval-knight-dark.jpg" />
     <Content Include="requirements.txt" />
     <Content Include="app\static\app\content\bootstrap.css" />

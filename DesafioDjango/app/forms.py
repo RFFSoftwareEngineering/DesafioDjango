@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import MegaProfile, FeedPost
+from .models import MegaProfile, FeedPost, Comments
 from django.contrib.auth.models import User  
 from django.core.exceptions import ValidationError  
 from django.forms.fields import EmailField  
@@ -65,3 +65,9 @@ class FeedPostModelForm(forms.ModelForm):
     class Meta:
         model = FeedPost
         fields = ['author', 'MsgBody', 'Likes']
+
+
+class CommentsModelForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['autor', 'Msg', 'LikesComm']
