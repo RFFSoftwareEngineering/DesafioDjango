@@ -28,10 +28,16 @@ class FeedPost(models.Model):
         return self.Likes.all().count()
 
 
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike')
+)
+
+
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(FeedPost, on_delete=models.CASCADE)
-    value = models.CharField(default='Like', max_length=10)
+    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
 
     def __str__(self):
         return str(self.post)
