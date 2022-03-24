@@ -1,25 +1,9 @@
 from django.contrib import admin
-from .models import Base, User, Usuario, Profile, MegaProfile, FeedPost, Comments, Like, Comments
-
-@admin.register(Base)
-class BaseAdmin(admin.ModelAdmin):
-    list_display = ['criado', 'modificado', 'ativo']
-
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email']
-
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['PlayerName', 'From']
-
-@admin.register(Usuario)
-class UsuaroAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'password1', 'password2']
+from .models import MegaProfile, FeedPost, Comments, Like
 
 @admin.register(MegaProfile)
 class MegaProfileAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'password1', 'password2', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
+    list_display = ['usuario', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
 
 @admin.register(FeedPost)
 class FeedPostAdmin(admin.ModelAdmin):

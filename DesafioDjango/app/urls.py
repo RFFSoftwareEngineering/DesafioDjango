@@ -10,7 +10,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('cadastro/', views.cadastro, name='cadastro'),
     path('CriaUser/', views.User_view, name='CreateUser'),
     path('login/',
          LoginView.as_view

@@ -1,8 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import Profile, MegaProfile, FeedPost
-from .forms import ProfileModelForm, CustomUserCreationForm, MegaProfileModelForm, FeedPostModelForm
+from .models import MegaProfile, FeedPost
+from .forms import CustomUserCreationForm, MegaProfileModelForm, FeedPostModelForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  
@@ -12,28 +12,11 @@ from django.urls import reverse_lazy
 def home(request):
     if str(request.user) != "AnonymousUser":
         context = {
-            "Perfil": Profile.objects.all()
          }
         return render(request, 'app/index.html', context)
     else:
         return redirect("CreateUser")
 
-
-def cadastro(request):
-    form1 = ProfileModelForm(request.POST, request.FILES) 
-    if str(request.method) == "POST":
-        if form1.is_valid():
-            form1.save()
-            messages.success(request, "Perfil Criado Com Sucesso!")
-            form1 = ProfileModelForm()
-        else:
-            messages.error(request, "Erro ao Criar Perfil")
-    else:
-        form1 = ProfileModelForm()
-    context = {
-        "form1": form1
-    }
-    return render(request, 'app/cadastro.html', context)
 
 def User_view(request):
     form2 = CustomUserCreationForm(request.POST or None)

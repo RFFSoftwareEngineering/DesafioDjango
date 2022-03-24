@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import Profile, Usuario, MegaProfile, FeedPost
+from .models import MegaProfile, FeedPost
 from django.contrib.auth.models import User  
 from django.core.exceptions import ValidationError  
 from django.forms.fields import EmailField  
@@ -17,13 +17,6 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder':'Password'}))
-
-
-class ProfileModelForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['PlayerImg', 'From', 'PlayerName', 'MsgBody']
-
 
 class CustomUserCreationForm(UserCreationForm):  
     username = forms.CharField(label='username', min_length=5, max_length=150)  
@@ -65,7 +58,7 @@ class CustomUserCreationForm(UserCreationForm):
 class MegaProfileModelForm(forms.ModelForm):
     class Meta:
         model = MegaProfile
-        fields = ['username', 'email', 'password1', 'password2', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
+        fields = ['usuario', 'UserImg', 'UserFrom', 'UserPlayerName', 'UserMsgBody']
 
 
 class FeedPostModelForm(forms.ModelForm):
