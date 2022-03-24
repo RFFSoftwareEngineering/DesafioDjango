@@ -27,10 +27,19 @@
         <h2>Posts</h2>
         {% for item in Posts %}
             <hr />
-            <p>autor:{{ item.author }}</p>
+            <p>autor:{{ item.author }} posted Msg:</p>
             <p>{{ item.created }}</p>
             <p>{{ item.MsgBody }}</p>
-            <p>likes : {{ item.num_likes }}</p>
+            <form action="{% url 'like-post' %}" method="post" class="form">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ item.id }}"/>
+                {% if user not in item.Likes.all %}
+                    <button class="btn btn-primary" type="submit">Like</button>
+                {% else %}
+                    <button class="btn btn-primary" type="submit">UnLike</button>
+                {% endif %}
+            </form>
+            <strong>{{ item.Likes.all.count }} likes</strong>
             <hr />
         {% endfor %}
     </div>

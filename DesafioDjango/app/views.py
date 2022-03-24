@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import MegaProfile, FeedPost
+from .models import MegaProfile, FeedPost, Like
 from .forms import CustomUserCreationForm, MegaProfileModelForm, FeedPostModelForm
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -62,6 +62,7 @@ def UserView(request):
 
 def post_on_feed(request):
     form4 = FeedPostModelForm(request.POST or None)
+    user = request.user
     if str(request.method) == "POST":
         if form4.is_valid():
             form4.save()
@@ -73,6 +74,29 @@ def post_on_feed(request):
         form4 = FeedPostModelForm()
     context = {
         "form4": form4,
-        "Posts": FeedPost.objects.all()
+        "Posts": FeedPost.objects.all(),
+        "user": user
     }
     return render(request, 'app/FeedPost.html', context)
+
+def like_post(request):
+    user = request.user
+    if str(request.method) == "POST":
+        post_id = request.POST.get('post_id')
+        post_obj = FeedPost.objects.get(id=post_id)
+
+        if user in post_obj.Likes.all():
+            post_obj.Likes.remove(user)
+        else:
+            post_obj.Likes.add(user)
+
+        like, created = Like.objects.get_or_create(user=user, post_id=post_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'UnLike'
+            else:
+                like.value = 'Like'
+
+        like.save()
+    return redirect('FeedPost')

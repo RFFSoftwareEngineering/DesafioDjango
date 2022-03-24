@@ -27,5 +27,6 @@ urlpatterns = [
     path('UserProfile/', views.UserProfile, name='UserProfile'),
     path('UserView/', views.UserView, name='UserView'),
     path('FeedPost/', views.post_on_feed, name='FeedPost'),
+    path('like/', views.like_post, name='like-post'),
     path('admin/', admin.site.urls),
 ]
