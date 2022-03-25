@@ -29,7 +29,10 @@ def home(request):
         page_obj = paginator.get_page(page_number)
         context = {
             'page_obj': page_obj,
-            'form6': form6
+            'form6': form6,
+            'Posts': FeedPost.objects.all(),
+            "Comms": Comments.objects.all(),
+            "user": user
          }
         return render(request, 'app/index.html', context)
     else:
@@ -104,7 +107,7 @@ def like_post(request):
     if str(request.method) == "POST":
         post_id = request.POST.get('post_id')
         post_obj = FeedPost.objects.get(id=post_id)
-
+        
         if user in post_obj.Likes.all():
             post_obj.Likes.remove(user)
         else:
@@ -120,12 +123,15 @@ def like_post(request):
 
         like.save()
         post_id2 = request.POST.get('post_id')
-        post_obj2 = Comments.objects.get(id=post_id)
 
-        if user in post_obj2.LikesComm.all():
-            post_obj2.LikesComm.remove(user)
-        else:
-            post_obj2.LikesComm.add(user)
+        try:
+            post_obj2 = Comments.objects.get(id=post_id)
+            if user in post_obj2.LikesComm.all():
+                post_obj2.LikesComm.remove(user)
+            else:
+                post_obj2.LikesComm.add(user)
+        except:
+            pass        
 
         like, created = Like.objects.get_or_create(user=user, post_id=post_id)
 
@@ -136,7 +142,7 @@ def like_post(request):
                 like.value = 'Like'
 
         like.save()
-    return redirect('FeedPost')
+    return redirect('home')
 
 def comm_post(request):
     form5 = CommentsModelForm(request.POST or None)
