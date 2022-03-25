@@ -11,13 +11,25 @@ from django.core.paginator import Paginator
 
 
 def home(request):
+    form6 = FeedPostModelForm(request.POST or None)
+    user = request.user
     if str(request.user) != "AnonymousUser":
+        if str(request.method) == "POST":
+            if form6.is_valid():
+                form6.save()
+                messages.success(request, "Post feito com Sucesso!")
+                form6 = FeedPostModelForm()
+            else:
+                messages.error(request, "Erro ao postar")
+        else:
+            form6 = FeedPostModelForm()
         data = MegaProfile.objects.all()
         paginator = Paginator(data, 1)
         page_number = request.GET.get('home')
         page_obj = paginator.get_page(page_number)
         context = {
-            'page_obj': page_obj
+            'page_obj': page_obj,
+            'form6': form6
          }
         return render(request, 'app/index.html', context)
     else:

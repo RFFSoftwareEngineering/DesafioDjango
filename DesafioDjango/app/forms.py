@@ -64,7 +64,7 @@ class MegaProfileModelForm(forms.ModelForm):
 class FeedPostModelForm(forms.ModelForm):
     class Meta:
         model = FeedPost
-        fields = ['author', 'MsgBody', 'Likes']
+        fields = ['author', 'MsgBody']
 
 
 class CommentsModelForm(forms.ModelForm):
