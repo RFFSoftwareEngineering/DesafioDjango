@@ -25,6 +25,15 @@ body {
     margin: 0 auto;
 }
 
+.container-sm {
+    background-color: #151728;
+    display: flex;
+    max-width: 1600px;
+    height: 120px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
 .left-side {
     width: 260px;
     border-right: 1px solid #272a3a;
